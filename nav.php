@@ -1,12 +1,39 @@
+<!-- Go to g1 and create Table
+  create Table with category name with 2 columns namely (id & name)
+  then create another table with product name with 3 columns namely (id, name, price)
+
+  PRODUCT:
+  Now, go to product key and make foreign key. Goto SQL and type "alter TABLE product add category int;" now press ctrl+enter.
+  Now, go back to product SQL and type "alter TABLE product add FOREIGN KEY (category) REFERENCES category (id);" now press Ctrl+enter.
+  No go to structure of Product. FOREIGN Key will be there.
+  
+  CATEGORY:
+  Now go to category tab and click on insert. In 1st category type "Men" & in 2nd category type "Women"
+  To insert another row, increase the number of insertion and click on go.
+
+  Now goto product and goto insert and type "Black Coat" in first and enter price. Then enter the category.
+  Repeat the same in other remaining categories.
+
+
+-->
+
+<?php
+
+include("config/connect.php")
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <title>Document</title>
 </head>
 <body>
+  
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
@@ -27,17 +54,25 @@
             Dropdown
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          
+          <?php
+            $sql = "SELECT * FROM `category`";
+            $result = mysqli_query($conn, $sql);
+
+            while($opt = mysqli_fetch_assoc($result)){
+
+              ?>
+              <li><a class= "dropdown-item " href ="cato.php?id=<?php echo $opt['id'] ?>"><?php echo $opt['name']?></a></li>
+            <?php } ?>
+
           </ul>
         </li>
+        
       </ul>
+    
     </div>
   </div>
 </nav>
-    
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
